@@ -1,65 +1,49 @@
 const mongoose=require('mongoose');
 
 
-const pgSchema=mongoose.Schema({
-        pgname:
+const eventSchema=mongoose.Schema({
+        eventname:
         {
             type:String,
             required:true
         },
-        ownername:
+        managerid:
         {
             type:String,
             required:true
         },
-        bed:
-        {
-            type:Number,
-            required:true
-        },
-        city:
+        eventheadname:
         {
             type:String,
             required:true
         },
-        pincode:
+        organisation:
         {
             type:String,
             required:true
         },
-        state:
+        date:
         {
             type:String,
             required:true
         },
         discription:
         {
-            type:String
-        },
-        type:
-        {
             type:String,
             required:true
         },
-        rent:
+        fee:
         {
             type:Number,
             required:true
         },
-        contactno:{
-            type:Number,
-            required:true
-        },
-        email:{
-            type:String
-        },
-        totalroom:{
-            type:Number,
-            required:true
-        },
-        ownerid:{
+        eventType:{
             type:String,
-            required:true,
+            require:true
+        },
+        location:{
+            type:String,
+            require:true
         },
         photos:{
             type:[]
@@ -68,6 +52,6 @@ const pgSchema=mongoose.Schema({
 
 
 
-const pgModel=mongoose.model('pglist',pgSchema);
+const eventModel=mongoose.model('eventlist',eventSchema);
 
-module.exports=pgModel;
+module.exports=eventModel;

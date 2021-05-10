@@ -8,23 +8,24 @@ var mongoose=require('mongoose');
 
 var jwt= require('jsonwebtoken');
 
-mongoose.connect('mongodb://127.0.0.1:27017/cityMate',{useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false})
+mongoose.connect('mongodb://127.0.0.1:27017/wissenIndia',{useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false})
 .then(()=>console.log("database is connected"))
 .catch((error)=>console.log(error));
 
 
-// mongoose.connect('mongodb+srv://lms:RyvUGRluJJs0ywAn@lms.z06ry.mongodb.net/LMS?retryWrites=true&w=majority',{useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false})
+// mongoose.connect('mongodb+srv://ajchaudhary:Chaudhary%231@cluster0.tb78w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false})
 // .then(()=>console.log("database is connected"))
 //  .catch((error)=>console.log(error));
  
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var pgRouter=require('./routes/pg');
-var tenantRouter=require('./routes/tenant'); 
-var ticketRouter=require('./routes/ticket');  
+var pgRouter=require('./routes/event');
+var audience=require('./routes/audience'); 
+var ticketRouter=require('./routes/ticket');   
+var organisation=require('./routes/organisation');
 var unirest = require("unirest");
-
+ 
 
 var app = express();
 app.use(cors());
@@ -40,11 +41,10 @@ app.use(express.static(path.join(__dirname, '')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/pg',pgRouter);
-app.use('/tenant',tenantRouter);
+app.use('/events',pgRouter);
+app.use('/audience',audience);
 app.use('/ticket',ticketRouter);
-
-
+app.use('/organisation',organisation);
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

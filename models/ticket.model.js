@@ -7,11 +7,11 @@ const ticketSchema=mongoose.Schema({
             type:String,
             required:true
         },
-        pgid:
+        eventid:
         {
             type:String
         },
-        ownerid:
+        managerid:
         {
             type:String,
             required:true

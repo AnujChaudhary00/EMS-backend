@@ -3,13 +3,14 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 const path = require('path');
 const multer = require('multer');
-const client = require('twilio')('ACca811e634e318c8a059b7f8da1f1cf7d', 'a62fea4340de867a816e1adc03ffa6e2');
+const client = require('twilio')('ACca811e634e318c8a059b7f8da1f1cf7d', '19f88bd163f5cf2f64baae72b7110ada');
 var bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
 
 var mongoose = require('mongoose');
 const { create } = require('../models/user.model');
 const userModel = require('../models/user.model');
+const contactModel=require('../models/contactus.model');
 const { send } = require('process');
 
 /* GET users listing. */
@@ -103,7 +104,6 @@ const storage = multer.diskStorage({
     cb(null, "images");
   },
   filename: function (req, file, cb) {
-    console.log(file);
     cb(null, `${Date.now()}_${file.originalname}`);
   }
 });
@@ -269,6 +269,28 @@ router.get('/search/:id', function (req, res, next) {
   })
 })
 
+router.post('/contactus',function(req,res,next)
+{
+  let ContactObj=new contactModel({
+     name:req.body.name,
+     email:req.body.email,
+     query:req.body.query
+  });
+  console.log(ContactObj);
+
+  ContactObj.save(function(err,response)
+  {
+    if(err)
+    {
+      console.log(err);
+      res.send({status:500,message:"Error while saving"});
+    }
+    else{
+      res.send({status:200,message:"Success"});
+    }
+  })
+})
+
 
 
 function verifyToken(req, res, next) {
@@ -289,5 +311,7 @@ function verifyToken(req, res, next) {
 
   next();
 }
+
+
 
 module.exports = router;

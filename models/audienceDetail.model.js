@@ -1,18 +1,18 @@
 const mongoose=require('mongoose');
 
 
-const tenantSchema=mongoose.Schema({
+const audienceSchema=mongoose.Schema({
 
-    pgbookedname:{
+    eventname:{
         type:String,
         required:true
     },
-    pgid:
+    eventid:
     {
         type:String,
         required:true,
     },
-    ownerid:{
+    managerid:{
         type:String,
         required:true
     },
@@ -21,7 +21,7 @@ const tenantSchema=mongoose.Schema({
         type:String,
         required:true,
     },
-    payment:
+    fee:
     {
         type:Number,
         required:true,
@@ -35,7 +35,15 @@ const tenantSchema=mongoose.Schema({
         type:String,
         required:true
     },
+    gender:{
+        type:String,
+        required:true
+    }, 
     userid:{
+        type:String,
+        required:true
+    },
+    date:{
         type:String,
         required:true
     }
@@ -43,6 +51,6 @@ const tenantSchema=mongoose.Schema({
 
 
 
-const tenantModel=mongoose.model('tenant',tenantSchema);
+const audienceModel=mongoose.model('audience',audienceSchema);
 
-module.exports=tenantModel;
+module.exports=audienceModel;

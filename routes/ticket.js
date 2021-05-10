@@ -6,21 +6,21 @@ const ticketModel=require('../models/ticket.model');
 router.post('/createTicket/:id', function(req, res, next) {
 
 
-    let pgid=req.body.propid;
+    let eventid=req.body.eventid;
     let type=req.body.type;
     let phonemail=req.body.phonemail;
     let discription=req.body.discription;
     let userid=req.params.id;
-    let ownerid=req.body.ownerid;
+    let managerid=req.body.managerid;
 
     let ticketObj=new ticketModel(
       {
         type:type,
-        pgid:pgid,
+        eventid:eventid,
         phonemail:phonemail,
         discription:discription,
         userid:userid,
-        ownerid:ownerid,
+        managerid:managerid,
         status:'Pending'
       }
     );
@@ -40,7 +40,7 @@ router.post('/createTicket/:id', function(req, res, next) {
 
   router.get('/getTicket/:id',function(req,res,next){
     console.log(req.params.id);
-      ticketModel.find({'ownerid':req.params.id},(err,ticket)=>{
+      ticketModel.find({'managerid':req.params.id},(err,ticket)=>{
         if(err)
         {
           console.log(err);
@@ -65,7 +65,7 @@ router.post('/createTicket/:id', function(req, res, next) {
   });
 
   router.get('/updateTicket/:id',function(req,res,next){
-    ticketModel.findOneAndUpdate({'ownerid':req.params.id},{'status':'resolved'},(err,ticket)=>{
+    ticketModel.findOneAndUpdate({'managerid':req.params.id},{'status':'resolved'},(err,ticket)=>{
       if(err)
       {
         console.log(err);
